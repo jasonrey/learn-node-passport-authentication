@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var passport = require('passport');
 
 var routes = require('./routes/index');
 
@@ -20,6 +22,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Required for passport
+
+// Set a secret key to the session, this can be any secret key
+app.use(session({
+    secret: 'learn-node-passport-authentication'
+}));
+
+// Initialize passport
+app.use(passport.initialize());
+
+// Required for persistent login using sessions
+app.use(passport.session());
 
 app.use('/', routes);
 
