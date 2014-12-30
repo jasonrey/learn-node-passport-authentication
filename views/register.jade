@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    .container
+        .col-sm-6.col-sm-offset-3
+            h1
+                i.fa.fa-pencil-square-o
+                = " Register"
+
+            form(method="post", action="/login")
+                .form-group
+                    label Username
+                    input.form-control(type="text", name="username")
+                .form-group
+                    label Password
+                    input.form-control(type="password", name="password")
+                button.btn.btn-warning(type="submit") Register
+
+            hr
+
+            p
+                = "Already have an account? "
+                a(href="/login") Login now.
