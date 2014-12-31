@@ -25,6 +25,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Required for passport
 
+require('./lib/passport')(passport);
+
 // Set a secret key to the session, this can be any secret key
 app.use(session({
     secret: 'learn-node-passport-authentication'
