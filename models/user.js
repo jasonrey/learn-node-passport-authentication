@@ -46,11 +46,11 @@ User.findById = function(id, callback) {
 User.findByUsername = function(username, callback) {
     db.get("SELECT * FROM users WHERE username = '" + username + "'", function(err, row) {
         if (err) {
-            return callback(err, user);
+            return callback(err);
         }
 
         if (row === undefined) {
-            return callback(new Error('Wrong username.'), user);
+            return callback(new Error('No such username.'));
         }
 
         // If the user object has been cached, we use the cache copy instead
