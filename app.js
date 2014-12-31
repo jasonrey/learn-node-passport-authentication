@@ -40,7 +40,7 @@ app.use(passport.session());
 
 app.use('/', routes);
 
-require('./routes/login')(app, passport);
+app.use('/', require('./routes/login')(passport));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
