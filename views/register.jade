@@ -7,6 +7,9 @@ block content
                 i.fa.fa-pencil-square-o
                 = " Register"
 
+            if message !== null && message !== undefined
+                .alert.alert-danger= message
+
             form(method="post", action="/register")
                 .form-group
                     label Username

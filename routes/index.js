@@ -8,21 +8,19 @@ router.get('/', function(req, res) {
 
 // Get login page
 router.get('/login', function(req, res) {
-  var message = null;
-
-  // If there is a login error, set the message then clear it because we only want this once
-  if (req.session.loginError !== undefined) {
-    message = req.session.loginError;
-    req.session.loginError = undefined;
-  }
-  res.render('login', {
-    message: message
-  });
+  res.render('login');
 });
 
 // Get register page
 router.get('/register', function(req, res) {
   res.render('register');
 });
+
+// Get profile page
+router.get('/profile', function(req, res) {
+  res.render('profile', {
+    user: req.user
+  });
+})
 
 module.exports = router;
