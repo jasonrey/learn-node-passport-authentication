@@ -8,6 +8,11 @@ router.get('/', function(req, res) {
 
 // Get login page
 router.get('/login', function(req, res) {
+  // If user has already logged in, redirect out to profile page
+  if (req.user) {
+    return res.redirect('/profile');
+  }
+
   var message = req.session.message;
   req.session.message = null;
 
@@ -18,6 +23,11 @@ router.get('/login', function(req, res) {
 
 // Get register page
 router.get('/register', function(req, res) {
+  // If user has already logged in, redirect out to profile page
+  if (req.user) {
+    return res.redirect('/profile');
+  }
+
   var message = req.session.message;
   req.session.message = null;
 
