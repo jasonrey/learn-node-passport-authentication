@@ -7,7 +7,7 @@ block content
                 i.fa.fa-pencil-square-o
                 = " Register"
 
-            if message !== null && message !== undefined
+            if message !== undefined && message
                 .alert.alert-danger= message
 
             form(method="post", action="/register")

@@ -7,7 +7,7 @@ block content
                 i.fa.fa-sign-in
                 = " Login"
 
-            if message !== null && message !== undefined
+            if message !== undefined && message
                 .alert.alert-danger= message
 
             form(method="post", action="/login")
