@@ -17,7 +17,7 @@ var User = function() {
 User.findById = function(id, callback) {
     // Search if the user object has been loaded before
     if (userCache[id] !== undefined) {
-        return callback(userCache[id]);
+        return callback(null, userCache[id]);
     }
 
     // If the user object has not been loaded before, we createa new instance and cache it.
@@ -76,6 +76,26 @@ User.prototype.setPassword = function(password) {
 
 User.prototype.isValidPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
+};
+
+User.prototype.save = function(callback) {
+    var user = this;
+
+    if (user.id) {
+        // Update
+
+        db.run("UPDATE users SET username = ?, password = ? WHERE id = ?", user.username, user.password, user.id, callback);
+    } else {
+        // Insert
+
+        db.run("INSERT INTO users (username, password) VALUES (?, ?)", user.username, user.password, function(err) {
+            if (!err) {
+                user.id = this.lastID;
+            }
+
+            callback && callback(err);
+        });
+    }
 }
 
 module.exports = User;
