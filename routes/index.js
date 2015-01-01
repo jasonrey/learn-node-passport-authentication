@@ -39,4 +39,16 @@ router.get('/profile', function(req, res) {
   });
 });
 
+// Logout
+router.get('/logout', function(req, res) {
+  // If no user is in the session, then we set a message
+  if (req.user === undefined || !req.user) {
+    req.session.message = 'Not logged in.';
+  }
+
+  req.logout();
+
+  return res.redirect('/login');
+});
+
 module.exports = router;
